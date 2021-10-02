@@ -1,6 +1,7 @@
 const http = require("http");
 
 const fs = require("fs");
+var path = "./views/";
 
 const server = http.createServer((req, res) => {
   console.log("request made", req.url, req.method);
@@ -8,33 +9,25 @@ const server = http.createServer((req, res) => {
   res.setHeader("Content-Type", "text/html");
   switch (req.url) {
     case "/":
-      fs.readFile("./views/index.html", { encoding: "utf-8" }, (err, data) => {
-        if (err) {
-          console.log(err);
-          res.end();
-        } else {
-          res.end(data);
-        }
-      });
+      path += "index.html";
+      break;
     case "/about":
-      fs.readFile("./views/about.html", { encoding: "utf-8" }, (err, data) => {
-        if (err) {
-          console.log(err);
-          res.end();
-        } else {
-          res.end(data);
-        }
-      });
+      path += "about.html";
+      break;
     default:
-      fs.readFile("./views/404.html", { encoding: "utf-8" }, (err, data) => {
-        if (err) {
-          console.log(err);
-          res.end();
-        } else {
-          res.end(data);
-        }
-      });
+      path += "404.html";
+      break;
   }
+
+  fs.readFile(path, { encoding: "utf-8" }, (err, data) => {
+    if (err) {
+      console.log(err);
+      res.end();
+    } else {
+      res.end(data);
+      path = "./views/";
+    }
+  });
 });
 
 server.listen(3000, "localhost", () => {
