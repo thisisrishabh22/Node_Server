@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/thisisrishabh22/Node_Server/issues"
   },
-  "homepage": "https://github.com/thisisrishabh22/Node_Server#readme"
+  "homepage": "https://github.com/thisisrishabh22/Node_Server#readme",
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
 }
