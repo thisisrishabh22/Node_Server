@@ -1,21 +1,20 @@
 const http = require("http");
 
 const fs = require("fs");
-var htmlTemplate;
-fs.readFile("./template.txt", { encoding: "utf-8" }, (err, data) => {
-  if (err) {
-    console.log(err);
-  } else {
-    htmlTemplate = data.toString();
-  }
-});
 
 const server = http.createServer((req, res) => {
   console.log("request made", req.url, req.method);
   console.log(res);
   res.setHeader("Content-Type", "text/html");
-  res.write(htmlTemplate);
-  res.end();
+  fs.readFile("./views/index.html", { encoding: "utf-8" }, (err, data) => {
+    if (err) {
+      console.log(err);
+      res.end();
+    } else {
+      //   res.write(data);
+      res.end(data);
+    }
+  });
 });
 
 server.listen(3000, "localhost", () => {
